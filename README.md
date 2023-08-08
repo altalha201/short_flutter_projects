@@ -6,5 +6,4 @@
 <p id="description">This repository contents some flutter projects that I developed for my self-improvement.</p>
 
 ### Project Demos
-- [![Color Palate](https://img.youtube.com/vi/nTQUwghvy5Q/default.jpg)](https://youtube.com/shorts/sfi6_SzpOOU?feature=share)
-  
+- [![Color Palate](https://img.youtube.com/vi/nTQUwghvy5Q/default.jpg)](https://youtube.com/shorts/sfi6_SzpOOU?feature=share)  
