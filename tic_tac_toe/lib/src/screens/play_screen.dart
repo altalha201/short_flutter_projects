@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../constants/constants.dart';
+import '../controller/game_play_controller.dart';
+import '../utils/pop_messages.dart';
+import '../widgets/game_item.dart';
+import '../widgets/icon_elevated_button.dart';
 import '../widgets/score_box.dart';
+import 'home_screen.dart';
 
 class PlayScreen extends StatefulWidget {
   const PlayScreen({Key? key, this.computerMood = false}) : super(key: key);
@@ -13,66 +19,175 @@ class PlayScreen extends StatefulWidget {
 }
 
 class _PlayScreenState extends State<PlayScreen> {
-  int oScore = 0;
-  int xScore = 0;
+  @override
+  void initState() {
+    WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((timeStamp) {
+      PopMessages.showAlert(
+        title: "Alert",
+        messages:
+        "Tap Start to start the game play.\nTaping Stop will cause end of the match."
+            "\nO will always be the first.",
+        onTap: () {
+          Get.back();
+        },
+      );
+      Get.find<GamePlayController>().updateComputerMood(widget.computerMood);
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Constants.colorBlue,
-      body: Container(
-        constraints: const BoxConstraints(maxWidth: 480),
-        alignment: Alignment.center,
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
+      body: GetBuilder<GamePlayController>(builder: (controller) {
+        return SafeArea(
+          child: Stack(
             children: [
-              Expanded(
-                flex: 1,
+              Padding(
+                padding: const EdgeInsets.all(16.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    ScoreBox(
-                      score: oScore,
-                      playerName: "Player O",
-                    ),
-                    ScoreBox(
-                      score: xScore,
-                      playerName: "Player X",
+                    Visibility(
+                      visible: !controller.gamePlayOn,
+                      replacement: const SizedBox.shrink(),
+                      child: IconButton(
+                        onPressed: _onEnd,
+                        icon: const Icon(
+                          Icons.exit_to_app,
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
                   ],
                 ),
               ),
-              Expanded(
-                flex: 3,
-                child: GridView.builder(
-                  itemCount: 9,
-                  gridDelegate:
-                      const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                        mainAxisSpacing: 8.0,
-                        crossAxisSpacing: 8.0,
-                  ),
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                        color: Constants.colorPurple,
-                        alignment: Alignment.center,
-                        child: Text("X", style: Constants.textStyleTitle.copyWith(fontSize: 64),),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          ScoreBox(
+                            score: controller.oScore,
+                            playerName: widget.computerMood ? "Player" : "Player O",
+                          ),
+                          ScoreBox(
+                            score: controller.xScore,
+                            playerName: widget.computerMood ? "Auto" : "Player X",
+                          ),
+                        ],
                       ),
-                    );
-                  },
+                    ),
+                    const Expanded(
+                      flex: 3,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              GameItem(
+                                index: 0,
+                              ),
+                              GameItem(
+                                index: 1,
+                              ),
+                              GameItem(
+                                index: 2,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              GameItem(
+                                index: 3,
+                              ),
+                              GameItem(
+                                index: 4,
+                              ),
+                              GameItem(
+                                index: 5,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              GameItem(
+                                index: 6,
+                              ),
+                              GameItem(
+                                index: 7,
+                              ),
+                              GameItem(
+                                index: 8,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Center(
+                        child: Visibility(
+                          visible: controller.gamePlayOn,
+                          replacement: IconElevatedButton(
+                            label: "Start",
+                            iconData: Icons.play_arrow,
+                            onPress: () {
+                              controller.startGamePlay();
+                            },
+                          ),
+                          child: IconElevatedButton(
+                            label: "Stop",
+                            iconData: Icons.stop,
+                            onPress: _onEnd,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              Expanded(
-                flex: 2,
-                child: Container(),
               ),
             ],
           ),
-        ),
-      ),
+        );
+      }),
     );
+  }
+
+  void _onEnd() {
+    var controller = Get.find<GamePlayController>();
+    controller.stopGamePlay();
+    String message;
+    if (controller.oScore == controller.xScore) {
+      message = "The game is draw!";
+    } else if (controller.oScore > controller.xScore) {
+      message = widget.computerMood ? "Player Wins!" : "Player O is the winner!";
+    } else {
+      message = widget.computerMood ? "Computer Wins!" : "Player X is the winner";
+    }
+    PopMessages.showAlert(
+      title: "Game Finished",
+      messages: message,
+      onTap: () {
+        Get.back();
+        Get.offAll(const HomeScreen());
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    Get.find<GamePlayController>().resetGame();
+    super.dispose();
   }
 }

@@ -12,13 +12,20 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
-  google_fonts: ^5.1.0 # For Using google fonts.
+  google_fonts: ^5.1.0 # for using google fonts.
+  get: ^4.6.5 # for state management.
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^2.0.0
+  flutter_launcher_icons: ^0.13.1 # icon change
+
+flutter_icons:
+  android: true
+  image_path: "assets/logo.png"
+  min_sdk_android: 21
 
 flutter:
   uses-material-design: true

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tic_tac_toe/src/screens/home_screen.dart';
+import 'package:get/get.dart';
 
 import 'src/constants/constants.dart';
+import 'src/controller/game_play_controller.dart';
+import 'src/screens/home_screen.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
@@ -18,7 +20,7 @@ class TicTacToe extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: "Tic Tac Toe",
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.light,
@@ -26,6 +28,14 @@ class TicTacToe extends StatelessWidget {
         primaryColor: Constants.colorLiteBlue,
       ),
       home: const HomeScreen(),
+      initialBinding: GameBindings(),
     );
+  }
+}
+
+class GameBindings extends Bindings {
+  @override
+  void dependencies() {
+    Get.put(GamePlayController());
   }
 }

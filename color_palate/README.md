@@ -12,4 +12,6 @@ color palate.
 
 #### Application preview
 
-[Preview](https://youtube.com/shorts/sfi6_SzpOOU?feature=share)
+[Preview video](https://youtube.com/shorts/sfi6_SzpOOU?feature=share)
+
+<a href="build\app\outputs\flutter-apk\app-release.apk" download>Download the apk (Android)</a>

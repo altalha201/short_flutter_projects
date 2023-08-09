@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:tic_tac_toe/src/screens/play_screen.dart';
+import 'package:get/get.dart';
 
 import '../constants/constants.dart';
 import '../widgets/application_background.dart';
 import '../widgets/icon_elevated_button.dart';
+import 'play_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -41,18 +42,25 @@ class HomeScreen extends StatelessWidget {
               height: 8.0,
             ),
             Expanded(
-              child: Center(
-                child: IconElevatedButton(
-                  label: '1 Vs. 1',
-                  iconData: Icons.people,
-                  onPress: () {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => const PlayScreen(),
-                      ),
-                    );
-                  },
-                ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconElevatedButton(
+                    label: '1 Vs. 1',
+                    iconData: Icons.people,
+                    onPress: () {
+                      Get.to(const PlayScreen());
+                    },
+                  ),
+                  const SizedBox(height: 16.0,),
+                  IconElevatedButton(
+                    label: 'Single',
+                    iconData: Icons.computer,
+                    onPress: () {
+                      Get.to(const PlayScreen(computerMood: true,));
+                    },
+                  ),
+                ],
               ),
             ),
             const Padding(
