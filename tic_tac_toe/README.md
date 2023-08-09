@@ -32,4 +32,4 @@ dev_dependencies:
 
 [Preview Video](https://youtube.com/shorts/BtCiOTRtopQ?feature=share)
 
-<a href="build\app\outputs\flutter-apk\app-release.apk" download>Download the apk (Android)</a>
+<a href="assets/tic_tac_toe.apk" download>Download the apk (Android)</a>
