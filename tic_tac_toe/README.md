@@ -1,6 +1,6 @@
 # Tic Tac Toe
 
-A game with flutter
+A game with flutter.
 
 ## Project description
 
