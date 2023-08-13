@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'pages/active_tasks.dart';
-import 'pages/completed_tasks.dart';
+import 'home_tabs/active_tasks.dart';
+import 'home_tabs/completed_tasks.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

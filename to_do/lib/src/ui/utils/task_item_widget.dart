@@ -53,14 +53,17 @@ class TaskItemWidget extends StatelessWidget {
                     borderRadius: BorderRadius.circular(4.0),
                   ),
                 ),
-                Text(
-                  taskTitle,
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    decoration: taskCompleted
-                        ? TextDecoration.lineThrough
-                        : TextDecoration.none,
+                Expanded(
+                  child: Text(
+                    taskTitle,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      decoration: taskCompleted
+                          ? TextDecoration.lineThrough
+                          : TextDecoration.none,
+                    ),
                   ),
                 )
               ],

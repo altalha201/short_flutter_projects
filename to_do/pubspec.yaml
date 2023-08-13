@@ -14,6 +14,9 @@ dependencies:
 
   cupertino_icons: ^1.0.2
   flutter_slidable: ^3.0.0 # Slide able button for delete
+  get: ^4.6.5 # state management
+  shared_preferences: ^2.2.0 # Local database
+  smooth_page_indicator: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -26,4 +29,4 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/
+    - assets/logo.png
