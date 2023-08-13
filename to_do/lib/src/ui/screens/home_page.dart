@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../../controller/task_controller.dart';
+import '../utils/task_add_dialog.dart';
 import 'home_tabs/active_tasks.dart';
 import 'home_tabs/completed_tasks.dart';
 
@@ -11,6 +14,22 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late TextEditingController _controller;
+  late GlobalKey<FormState> _formKey;
+
+  @override
+  void initState() {
+    _controller = TextEditingController();
+    _formKey = GlobalKey<FormState>();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -41,8 +60,34 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          child: const Icon(Icons.add, color: Colors.white,),
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (context) {
+                return TaskAddDialog(
+                  controller: _controller,
+                  formKey: _formKey,
+                  validator: (value) {
+                    if(value?.isEmpty ?? true) {
+                      return "Enter a title.";
+                    }
+                    return null;
+                  },
+                  onAdd: () {
+                    if (_formKey.currentState!.validate()) {
+                      Get.find<TaskController>().addToList(_controller.text);
+                      _controller.clear();
+                      Navigator.of(context).pop();
+                    }
+                  },
+                );
+              },
+            );
+          },
+          child: const Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
         ),
       ),
     );

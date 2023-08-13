@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:to_do/src/controller/task_controller.dart';
+import 'package:get/get.dart';
 
+import '../../../controller/task_controller.dart';
+import '../../utils/task_details_dialog.dart';
 import '../../utils/task_item_widget.dart';
 
 class CompletedTasks extends StatefulWidget {
@@ -28,7 +29,17 @@ class _CompletedTasksState extends State<CompletedTasks> {
               return TaskItemWidget(
                 taskTitle: item.toDoTitle ?? "",
                 taskCompleted: item.completed ?? true,
-                onDelete: (context) {},
+                onDelete: (context) {
+                  taskController.deleteItem(item);
+                },
+                onItemTap: () {
+                  showDialog(context: context, builder: (context) {
+                    return TaskDetailsDialog(task: item);
+                  },);
+                },
+                onCheck: (value) {
+                  taskController.updateTask(item, value ?? false);
+                },
               );
             },
           );

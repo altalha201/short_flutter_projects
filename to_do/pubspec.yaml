@@ -17,6 +17,7 @@ dependencies:
   get: ^4.6.5 # state management
   shared_preferences: ^2.2.0 # Local database
   smooth_page_indicator: ^1.1.0
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:

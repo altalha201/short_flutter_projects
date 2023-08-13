@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:to_do/src/controller/task_controller.dart';
 
+import '../../../controller/task_controller.dart';
+import '../../utils/task_details_dialog.dart';
 import '../../utils/task_item_widget.dart';
 
 class ActiveTasks extends StatefulWidget {
@@ -28,7 +29,17 @@ class _ActiveTasksState extends State<ActiveTasks> {
               return TaskItemWidget(
                 taskTitle: item.toDoTitle ?? "",
                 taskCompleted: item.completed ?? false,
-                onDelete: (context) {},
+                onDelete: (context) {
+                  taskController.deleteItem(item);
+                },
+                onItemTap: () {
+                  showDialog(context: context, builder: (context) {
+                    return TaskDetailsDialog(task: item);
+                  },);
+                },
+                onCheck: (value) {
+                  taskController.updateTask(item, value ?? true);
+                },
               );
             },
           );

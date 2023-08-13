@@ -46,6 +46,14 @@ class TaskController extends GetxController {
     update();
   }
 
+  Future<void> updateTask(ToDoModel task, bool newState) async {
+    var index = _fullList.indexOf(task);
+    _fullList[index].completed = newState;
+    _updateLists();
+    await DatabaseController.saveList(_fullList);
+    update();
+  }
+
   Future<void> deleteItem(ToDoModel task) async {
     _fullList.remove(task);
     _updateLists();
