@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import 'src/view/screens/splash_page.dart';
 
 void main() {
   runApp(const PasswordManager());
@@ -7,16 +10,17 @@ void main() {
 class PasswordManager extends StatelessWidget {
   const PasswordManager({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Password Manager',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
         useMaterial3: true,
+        scaffoldBackgroundColor: Colors.blueGrey.shade200
       ),
-      home: const Scaffold(),
+      home: const SplashPage(),
     );
   }
 }
