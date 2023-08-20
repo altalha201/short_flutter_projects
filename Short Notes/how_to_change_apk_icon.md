@@ -4,9 +4,9 @@ In flutter we can easily change the launching icon for all the platforms. We can
 
 ## Change the icon using package
 
-<b>Package Name</b>: Flutter Launcher Icons
-<b>Pub points</b>: 130
-<b>Popularity</b>: 100%
+<b>Package Name</b>: Flutter Launcher Icons <br>
+<b>Pub points</b>: 130 <br>
+<b>Popularity</b>: 100% <br>
 
 ##### Step 1:
 Add your Flutter Launcher Icons configuration to your <b>pubspec.yaml</b>.
