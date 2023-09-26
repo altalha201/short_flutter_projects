@@ -25,13 +25,24 @@ class FiledTextInput extends StatelessWidget {
         hintText: hintText,
         fillColor: Colors.grey.shade300,
         filled: true,
-        contentPadding: const EdgeInsets.all(8.0),
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide.none,
           borderRadius: BorderRadius.circular(8.0),
         ),
+        errorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: Colors.red,
+            width: 0.5,
+          ),
+          borderRadius: BorderRadius.circular(8.0),
+        ),
         focusColor: Colors.black,
-        focusedErrorBorder: InputBorder.none,
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(8.0),
+        ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide.none,
           borderRadius: BorderRadius.circular(8.0),
