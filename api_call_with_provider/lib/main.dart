@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/theme_provider.dart';
+import 'providers/todo_provider.dart';
 import 'screens/home_page.dart';
 
 void main() {
@@ -17,6 +18,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<ThemeProvider>(
           create: (context) => ThemeProvider(),
+        ),
+        ChangeNotifierProvider<ToDoProvider>(
+          create: (context) => ToDoProvider(),
         ),
       ],
       child: Consumer<ThemeProvider>(
