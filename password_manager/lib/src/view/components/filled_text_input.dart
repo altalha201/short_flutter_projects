@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class FiledTextInput extends StatelessWidget {
-  const FiledTextInput({
+class FilledTextInput extends StatelessWidget {
+  const FilledTextInput({
     super.key,
     required this.hintText,
     this.controller,

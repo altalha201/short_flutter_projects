@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../view_model/controllers/auth_controller.dart';
-import '../../components/filed_text_input.dart';
+import '../../components/filled_text_input.dart';
 import '../../components/loadings/circle_loading.dart';
 
 class SignUpForm extends StatefulWidget {
@@ -76,25 +76,25 @@ class _SignUpFormState extends State<SignUpForm> {
       child: Column(
         // mainAxisSize: MainAxisSize.min,
         children: [
-          FiledTextInput(
+          FilledTextInput(
             hintText: "Email",
             controller: _emailET,
             validator: _emailValidator,
           ),
           const SizedBox(height: 8.0),
-          FiledTextInput(
+          FilledTextInput(
             hintText: "Name",
             controller: _nameET,
             validator: _nameValidator,
           ),
           const SizedBox(height: 8.0),
-          FiledTextInput(
+          FilledTextInput(
             hintText: "Password",
             controller: _passET,
             validator: _passValidator,
           ),
           const SizedBox(height: 8.0),
-          FiledTextInput(
+          FilledTextInput(
             hintText: "Reenter Password",
             validator: _confirmValidation,
           ),

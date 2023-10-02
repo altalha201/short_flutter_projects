@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../view_model/controllers/auth_controller.dart';
-import '../../components/filed_text_input.dart';
+import '../../components/filled_text_input.dart';
 import '../../components/loadings/circle_loading.dart';
 
 class LoginForm extends StatefulWidget {
@@ -61,13 +61,13 @@ class _LoginFormState extends State<LoginForm> {
       key: _loginKey,
       child: Column(
         children: [
-          FiledTextInput(
+          FilledTextInput(
             hintText: "Email address",
             validator: _emailValidator,
             controller: _emailET,
           ),
           const SizedBox(height: 8.0),
-          FiledTextInput(
+          FilledTextInput(
             hintText: "Password",
             validator: _passValidator,
             controller: _passET,

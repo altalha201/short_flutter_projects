@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../helper/navigation_helper.dart';
 import '../helper/view_constants.dart';
-import 'main_page/home_page.dart';
+import 'main_screen/home_page.dart';
 // import 'login_screen/login_page.dart';
 
 class SplashPage extends StatefulWidget {
