@@ -20,19 +20,27 @@ class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          const Center(
-            child: AuthBodyCard(
-              child: SignUpItems(),
-            ),
+      body: SingleChildScrollView(
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height,
+          child: Column(
+            children: [
+              const Expanded(
+                child: Center(
+                  child: AuthBodyCard(
+                    child: SignUpItems(),
+                  ),
+                ),
+              ),
+              FloatingTextButton(
+                onTap: _goToLogin,
+                firstText: "Already have an account?",
+                secondText: "Login",
+                positioned: false,
+              ),
+            ],
           ),
-          FloatingTextButton(
-            onTap: _goToLogin,
-            firstText: "Already have an account?",
-            secondText: "Login",
-          ),
-        ],
+        ),
       ),
     );
   }

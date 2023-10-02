@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 
 import '../helper/navigation_helper.dart';
 import '../helper/view_constants.dart';
-import 'login_screen/login_page.dart';
+import 'main_page/home_page.dart';
+// import 'login_screen/login_page.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -26,7 +27,8 @@ class _SplashPageState extends State<SplashPage>
     )..repeat();
     WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((timeStamp) {
       Future.delayed(const Duration(seconds: 5)).then((value) {
-        NavigationHelper.offAll(const LoginPage());
+        // NavigationHelper.offAll(const LoginPage());
+        NavigationHelper.offAll(const HomePage());
       });
     });
   }

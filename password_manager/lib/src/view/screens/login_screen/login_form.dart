@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import '../../../view_model/controllers/auth_controller.dart';
 import '../../components/filed_text_input.dart';
+import '../../components/loadings/circle_loading.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({
@@ -80,9 +81,7 @@ class _LoginFormState extends State<LoginForm> {
                 width: 120,
                 child: GetBuilder<AuthController>(builder: (auth) {
                   if (auth.loginInProgress) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
+                    return const CircleLoading();
                   }
                   return ElevatedButton(
                     onPressed: loginOnPress,

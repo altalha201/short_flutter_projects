@@ -15,7 +15,7 @@ class AuthController extends GetxController {
     });
   }
 
-  Future<void> createAccount() async {
+  Future<void> createAccount(String email, String name, String pass) async {
     _creatingAuth = true;
     update();
     Future.delayed(const Duration(seconds: 2)).then((value) {

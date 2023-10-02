@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'sign_up_form.dart';
+
 class SignUpItems extends StatelessWidget {
   const SignUpItems({
     super.key,
@@ -24,6 +26,7 @@ class SignUpItems extends StatelessWidget {
           style: Theme.of(context).textTheme.labelLarge,
         ),
         const SizedBox(height: 16.0),
+        const SignUpForm()
       ],
     );
   }

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "604193194078",
+    "project_id": "password-manager-backend-rest",
+    "storage_bucket": "password-manager-backend-rest.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:604193194078:android:e951c2e7367681181e34cf",
+        "android_client_info": {
+          "package_name": "com.altalha.password_manager"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5NpnpL5Op9XXNk_D4dXCzXvpYnU4otIE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
