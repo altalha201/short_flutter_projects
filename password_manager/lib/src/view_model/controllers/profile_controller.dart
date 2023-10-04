@@ -6,6 +6,7 @@ import '../../model/user_model.dart';
 import '../helpers/collection_path.dart';
 import '../services/encrypt_services.dart';
 import '../services/storage_service.dart';
+import 'data_controller.dart';
 
 class ProfileController extends GetxController {
   UserModel _loggedInUser = UserModel();
@@ -28,6 +29,7 @@ class ProfileController extends GetxController {
     );
     if (response.isSuccess) {
       _loggedInUser = UserModel.fromJson(response.body);
+      await Get.find<DataController>().getList();
       update();
       return true;
     } else {
@@ -64,6 +66,16 @@ class ProfileController extends GetxController {
       log("Something went wrong.");
       return false;
     }
+  }
+
+  Future<bool> updateCurrentProfile() async {
+    final response = await StorageService.updateDoc(
+      CollectionPath.userCollection,
+      _currentUserID,
+      _loggedInUser.toJson(),
+    );
+    log(response.isSuccess ? "success" : "failed");
+    return response.isSuccess;
   }
 
   void clearCurrent() {

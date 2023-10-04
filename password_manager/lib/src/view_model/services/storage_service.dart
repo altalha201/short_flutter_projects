@@ -33,7 +33,7 @@ class StorageService {
       return ResponseModel(
         isSuccess: true,
         statusCode: 200,
-        body: json,
+        body: json.data(),
       );
     } catch (e) {
       return ResponseModel(

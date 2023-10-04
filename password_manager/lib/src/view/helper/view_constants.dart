@@ -4,5 +4,5 @@ class ViewConstants {
 
   static const String _baseSiteLocation = "assets/site_logos/";
 
-  static String getSiteLogoAt(int index) => "$_baseSiteLocation$index";
+  static String getSiteLogoAt(int index) => "$_baseSiteLocation$index.png";
 }

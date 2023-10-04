@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../view_model/controllers/profile_controller.dart';
 import '../../helper/navigation_helper.dart';
 import '../add_item_screen/add_item_page.dart';
 
@@ -54,12 +55,16 @@ class CounterRow extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            "100",
-            style: GoogleFonts.ubuntu(
-              color: Colors.white,
-              fontSize: 28,
-            ),
+          GetBuilder<ProfileController>(
+            builder: (controller) {
+              return Text(
+                "${controller.currentUser.userPassList?.length ?? 0}",
+                style: GoogleFonts.ubuntu(
+                  color: Colors.white,
+                  fontSize: 28,
+                ),
+              );
+            }
           ),
           const SizedBox(width: 16.0),
           Flexible(

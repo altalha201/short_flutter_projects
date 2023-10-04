@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import '../../../view_model/controllers/auth_controller.dart';
 import '../../components/filled_text_input.dart';
 import '../../components/loadings/circle_loading.dart';
+import '../../helper/navigation_helper.dart';
+import '../main_screen/home_page.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({
@@ -36,8 +38,11 @@ class _LoginFormState extends State<LoginForm> {
 
   Future<void> loginOnPress() async {
     if (_loginKey.currentState!.validate()) {
-      await Get.find<AuthController>()
+      final response = await Get.find<AuthController>()
           .login(_emailET.text.trim(), _passET.text);
+      if(response) {
+        NavigationHelper.offAll(const HomePage());
+      }
     }
   }
 

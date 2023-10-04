@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import '../../../view_model/controllers/auth_controller.dart';
 import '../../components/filled_text_input.dart';
 import '../../components/loadings/circle_loading.dart';
+import '../../helper/navigation_helper.dart';
+import '../main_screen/home_page.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({super.key});
@@ -46,10 +48,13 @@ class _SignUpFormState extends State<SignUpForm> {
     return null;
   }
 
-  void _signUp() {
+  void _signUp() async {
     if (_signUpKey.currentState?.validate() ?? false) {
-      Get.find<AuthController>()
+      final response = await Get.find<AuthController>()
           .createAccount(_emailET.text.trim(), _nameET.text, _passET.text);
+      if (response) {
+        NavigationHelper.offAll(const HomePage());
+      }
     }
   }
 
@@ -91,11 +96,13 @@ class _SignUpFormState extends State<SignUpForm> {
           FilledTextInput(
             hintText: "Password",
             controller: _passET,
+            obscureText: true,
             validator: _passValidator,
           ),
           const SizedBox(height: 8.0),
           FilledTextInput(
             hintText: "Reenter Password",
+            obscureText: true,
             validator: _confirmValidation,
           ),
           const SizedBox(height: 16.0),

@@ -21,5 +21,12 @@ class AppTheme {
             minimumSize: const Size(120, 44),
           ),
         ),
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0),
+        )
+      )
+    )
       );
 }
