@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../model/password_model.dart';
+import '../../view_model/controllers/data_controller.dart';
 import '../helper/dialogs.dart';
 import '../helper/view_constants.dart';
+import 'bottom_sheet/edit_bottom_sheet.dart';
 
 class PasswordListItem extends StatelessWidget {
   const PasswordListItem({
@@ -11,6 +14,38 @@ class PasswordListItem extends StatelessWidget {
   });
 
   final PasswordModel item;
+
+  void _onTap() {
+    Dialogs.passwordDialog(
+      password: item.sitePass ?? "",
+      siteName: item.siteName ?? "",
+      loginInfo: item.siteLogin ?? "",
+    );
+  }
+
+  void _onEdit() {
+    Get.back();
+    Get.bottomSheet(
+      EditBottomSheet(
+        siteID: item.pId ?? "",
+        sitePass: item.sitePass ?? "",
+      ),
+      backgroundColor: Colors.transparent,
+    );
+  }
+
+  void _onDelete() async {
+    Get.back();
+    Dialogs.warningDialog(
+      title: "Delete?",
+      message: "Want to delete ${item.siteLogin} account of ${item.siteName}?",
+      confirmText: "Delete",
+      onConfirm: () async {
+        await Get.find<DataController>().deletePassword(item.pId ?? "");
+        Get.back();
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +75,7 @@ class PasswordListItem extends StatelessWidget {
       itemBuilder: (context) => [
         PopupMenuItem(
           child: TextButton.icon(
-            onPressed: () {},
+            onPressed: _onEdit,
             style: TextButton.styleFrom(
               foregroundColor: Colors.white,
             ),
@@ -50,23 +85,15 @@ class PasswordListItem extends StatelessWidget {
         ),
         PopupMenuItem(
           child: TextButton.icon(
-            onPressed: () {},
+            onPressed: _onDelete,
             style: TextButton.styleFrom(
-                foregroundColor: Colors.white,
+              foregroundColor: Colors.white,
             ),
             icon: const Icon(Icons.delete),
             label: const Text("Delete"),
           ),
         ),
       ],
-    );
-  }
-
-  void _onTap() {
-    Dialogs.passwordDialog(
-      password: item.sitePass ?? "",
-      siteName: item.siteName ?? "",
-      loginInfo: item.siteLogin ?? "",
     );
   }
 

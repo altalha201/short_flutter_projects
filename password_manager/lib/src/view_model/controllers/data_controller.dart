@@ -10,16 +10,19 @@ import '../services/storage_service.dart';
 import 'profile_controller.dart';
 
 class DataController extends GetxController {
-  bool _addingNewData = false, _gettingList = false;
+  bool _addingNewData = false, _gettingList = false, _updating = false;
   final List<PasswordModel> _currentList = [];
 
   bool get addingNewData => _addingNewData;
+
+  bool get updating => _updating;
 
   bool get gettingList => _gettingList;
 
   List<PasswordModel> get currentList => _currentList;
 
   String getPassword(String encrypted) => EncryptServices.retrieve(encrypted);
+  String getEncrypt(String text) => EncryptServices.create(text);
 
   Future<bool> addNew(
     int siteIndex,
@@ -75,6 +78,36 @@ class DataController extends GetxController {
       }
     }
     _gettingList = false;
+    update();
+  }
+
+  Future<void> deletePassword(String passID) async {
+    _currentList.removeWhere((pass) => pass.pId == passID);
+    Get.find<ProfileController>().currentUser.userPassList?.remove(passID);
+    update();
+    await Get.find<ProfileController>().updateCurrentProfile();
+    final response =
+        await StorageService.deleteDoc(CollectionPath.passCollection, passID);
+    if (response.isSuccess) {
+      log("Success");
+    } else {
+      log("failed");
+    }
+  }
+
+  Future<void> editPassword(String passID, String newPass) async {
+    _updating = true;
+    update();
+    final response = await StorageService.updateDoc(
+      CollectionPath.passCollection,
+      passID,
+      {'site_pass' : newPass},
+    );
+    _updating = false;
+    if(response.isSuccess) {
+      await getList();
+    }
+    log(response.isSuccess.toString());
     update();
   }
 }
