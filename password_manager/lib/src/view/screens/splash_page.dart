@@ -1,8 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:password_manager/src/view/screens/login_page.dart';
+
+import '../helper/navigation_helper.dart';
+import '../helper/view_constants.dart';
+import 'login_screen/login_page.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -24,12 +26,7 @@ class _SplashPageState extends State<SplashPage>
     )..repeat();
     WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((timeStamp) {
       Future.delayed(const Duration(seconds: 5)).then((value) {
-        Get.off(
-          const LoginPage(),
-          transition: Transition.downToUp,
-          duration: const Duration(seconds: 1),
-          curve: Curves.easeInOut,
-        );
+        NavigationHelper.offAll(const LoginPage());
       });
     });
   }
@@ -51,7 +48,7 @@ class _SplashPageState extends State<SplashPage>
               return Transform.rotate(
                 angle: _animationController.value * 2 * pi,
                 child: Image.asset(
-                  'assets/app_assets/icon_logo.png',
+                  ViewConstants.iconLogoImg,
                   width: 200,
                 ),
               );

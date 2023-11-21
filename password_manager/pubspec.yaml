@@ -13,6 +13,13 @@ dependencies:
 
   cupertino_icons: ^1.0.2
   get: ^4.6.5
+  get_storage: ^2.1.1
+  email_validator: ^2.1.17
+  firebase_core: ^2.16.0
+  firebase_auth: ^4.10.0
+  cloud_firestore: ^4.9.2
+  google_fonts: ^6.1.0
+  encrypt: ^5.0.3
 
 dev_dependencies:
   flutter_test:
@@ -26,3 +33,4 @@ flutter:
 
   assets:
     - assets/app_assets/
+    - assets/site_logos/
